@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../inc/config.php';
 require_once __DIR__ . '/../inc/db.php';
 require_once __DIR__ . '/../inc/csrf.php';
-session_start();
+if (session_status() !== PHP_SESSION_ACTIVE) { session_start(); }
 if (isset($_SESSION['admin'])) { header('Location: dashboard.php'); exit; }
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

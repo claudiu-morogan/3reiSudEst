@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../inc/config.php';
 require_once __DIR__ . '/../inc/db.php';
-session_start();
+if (session_status() !== PHP_SESSION_ACTIVE) { session_start(); }
 if (!isset($_SESSION['admin'])) { header('Location: index.php'); exit; }
 $msg = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
