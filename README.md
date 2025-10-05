@@ -25,3 +25,11 @@ Acesta este un scaffold minim pentru un fan site despre trupa 3 Sud Est folosind
 ## Notă de securitate
 
 Acest proiect este doar pentru dezvoltare locală și învățare. Nu folosiți credențiale hardcodate sau logica de autentificare din `admin/` pe un server public fără a o securiza (HTTPS, validare, hashing de parole, CSRF, rate limiting etc.).
+
+## Creare cont admin (one-time)
+
+1. Editați `admin/setup_user.php` și setați valorile `$user` și `$pass` la credentialele dorite.
+2. Accesați `http://localhost/3reiSudEst/admin/setup_user.php` o singură dată. Scriptul va crea un user în tabela `users` cu parola hash-uită.
+3. După confirmare, ștergeți sau redenumiți `admin/setup_user.php` pentru a nu lăsa un endpoint de creare cont expus.
+
+După aceasta, folosiți pagina de login `http://localhost/3reiSudEst/admin/` pentru a vă autentifica.

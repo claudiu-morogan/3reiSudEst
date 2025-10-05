@@ -5,9 +5,8 @@ define('DB_NAME', '3reisudest');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 
-// Simple admin credentials for local dev (DO NOT USE IN PRODUCTION)
-define('ADMIN_USER', 'admin');
-define('ADMIN_PASS', 'admin123');
+// Admin credentials should be created in the database using the one-off script
+// See admin/setup_user.php to create an initial admin user (hashed password)
 
 // Project root
 define('ROOT', __DIR__ . '/..');
