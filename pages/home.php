@@ -1,7 +1,7 @@
 <div class="row g-4">
     <div class="col-lg-8">
-            <div class="card p-4 hero-gradient">
-                <h2 class="fw-bold">Bine ai venit pe fan site-ul 3 Sud Est</h2>
+                <div class="card p-4 hero-gradient">
+                    <h2 class="fw-bold rainbow-text">Bine ai venit pe fan site-ul 3 Sud Est</h2>
                 <p class="mb-0">Acesta este un site colorat, dedicat fanilor — știri, membri și evenimente.</p>
             </div>
 

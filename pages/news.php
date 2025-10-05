@@ -6,7 +6,7 @@
       if (!$item) {
           echo '<h2>Știre inexistentă</h2>';
       } else {
-          echo '<h2>' . htmlspecialchars($item['title']) . '</h2>';
+          echo '<h2 class="rainbow-text">' . htmlspecialchars($item['title']) . '</h2>';
           echo '<p>' . nl2br(htmlspecialchars($item['content'])) . '</p>';
           echo '<p class="text-muted small">Publicat: ' . htmlspecialchars($item['created_at']) . '</p>';
       }
@@ -24,7 +24,7 @@
       } else {
           foreach ($items as $n) {
               echo '<article class="mb-3">';
-              echo '<h4><a href="/3reiSudEst/?page=news&id=' . $n['id'] . '">' . htmlspecialchars($n['title']) . '</a></h4>';
+              echo '<h4><a class="rainbow-text" style="text-decoration:none;" href="/3reiSudEst/?page=news&id=' . $n['id'] . '">' . htmlspecialchars($n['title']) . '</a></h4>';
               echo '<p class="text-muted small mb-1">Publicat: ' . htmlspecialchars($n['created_at']) . '</p>';
               echo '<p>' . nl2br(htmlspecialchars(substr($n['content'],0,300))) . '...</p>';
               echo '</article>';
