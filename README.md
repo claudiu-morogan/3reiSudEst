@@ -1,65 +1,61 @@
 # 3reiSudEst
 
-Acesta este un scaffold minim pentru un fan site despre trupa 3 Sud Est folosind PHP + MySQL destinat rulării locale (de ex. XAMPP).
+Acest repository este un fan-site construit cu PHP + MySQL (potrivit pentru rulare locală, ex: XAMPP). A fost actualizat pentru a include un UI întunecat cu accente neon, autentificare simplă, editor WYSIWYG cu upload de imagini și un sanitizator HTML simplu.
 
-## Setup rapid
+## Ce e nou (rezumat)
+- Tema dark cu accente neon (fișiere în `css/style.css`).
+- Autentificare la rută `/autentificare` (pag. `autentificare/index.php`).
+- Editor WYSIWYG Quill în admin cu upload direct de imagini (endpoint: `admin/upload.php`) — imaginile sunt salvate în `uploads/`.
+- Sanitizare a HTML-ului introdus în admin: `inc/sanitize.php` (curățare DOM-based). Pentru producție recomand HTMLPurifier.
+- Helper `base_url()` în `inc/config.php` pentru construirea dinamică a URL-urilor.
 
-1. Copiați acest folder în: C:\xampp\htdocs\3reiSudEst (dacă nu este deja acolo).
-2. Porniți XAMPP (Apache + MySQL).
-3. Creați o bază de date numită `3reisudest` sau modificați `inc/config.php` pentru a folosi alt nume.
-4. Importați `sql/init.sql` în phpMyAdmin (sau rulați scriptul SQL) pentru a crea tabelele și datele de exemplu.
-5. Verificați/actualizați `inc/config.php` cu credențialele bazei de date (de obicei user: `root`, parola goală local pe XAMPP).
-6. Accesați: http://localhost/3reiSudEst/
+## Setup rapid (local)
+1. Copiați proiectul în folderul serverului (ex: `C:\xampp\htdocs\3reiSudEst`).
+2. Porniți Apache și MySQL (XAMPP).
+3. Creați o bază de date numită `3reisudest` sau modificați `DB_NAME` în `.env`/`inc/config.php`.
+4. Importați `sql/init.sql` în phpMyAdmin pentru a crea tabelele și datele de exemplu.
+5. Opțional: creați un fișier `.env` în root (vezi `.env.example`) pentru setările DB.
+6. Accesați: `http://localhost/3reiSudEst/` (sau calea unde ați copiat proiectul).
 
-## Fișiere importante
-
-- `index.php` — router minimal și pagină principală
-- `inc/config.php` — setări DB și admin (development only)
-- `inc/db.php` — helper PDO
-- `inc/header.php`, `inc/footer.php` — layout comun
-- `pages/*` — pagini: `home`, `about`, `members`, `news`
-- `admin/*` — login simplu și dashboard pentru a administra știri (doar exemplu)
-- `css/style.css` — stil minim
-- `sql/init.sql` — script SQL de inițializare
-
-## Notă de securitate
-
-Acest proiect este doar pentru dezvoltare locală și învățare. Nu folosiți credențiale hardcodate sau logica de autentificare din `admin/` pe un server public fără a o securiza (HTTPS, validare, hashing de parole, CSRF, rate limiting etc.).
-
-## Creare cont admin (one-time)
-
-1. Folosiți scriptul CLI pentru a crea un admin (recomandat):
+## Creare cont admin (rapid)
+Crearea unui admin se face recomandat din linia de comandă (script CLI):
 
 ```powershell
 php scripts/create_admin.php <username> <password>
 ```
 
-2. Alternativ, editați `.env` (sau folosiți `.env.example`) pentru setările DB.
-3. După crearea contului, nu uitați să păstrați `.env` în afara repo-ului (este inclus în `.gitignore`).
+După aceea folosiți `http://localhost/3reiSudEst/autentificare` pentru a vă autentifica.
 
-După aceasta, folosiți pagina de login `http://localhost/3reiSudEst/admin/` pentru a vă autentifica.
+## Upload imagini din editor (Quill)
+- În admin (Dashboard / Edit) folosiți butonul imagine din toolbar Quill.
+- Imaginea va fi încărcată la `POST /3reiSudEst/admin/upload.php` (doar admin autentificat).
+- Fișierele sunt validate (jpeg/png/gif) și limitate la 2MB. Se salvează în `uploads/` (aflat în `.gitignore`).
+- Endpoint-ul returnează JSON cu `url` absolut construit dinamic (folosind `base_url()`).
+
+## Unde se află lucrurile importante
+- `index.php` — router simplu + front controller
+- `inc/config.php` — setări și helper `base_url()`
+- `inc/db.php` — funcții PDO pentru news și users
+- `inc/sanitize.php` — sanitizator HTML (DOM-based)
+- `admin/` — login, dashboard, edit, delete, upload
+- `autentificare/` — pagina de login disponibilă la `/autentificare`
+- `uploads/` — fișiere încărcate (ignorate de git)
+- `css/style.css` — variabile de temă și reguli vizuale
+
+## Siguranță și recomandări
+- Sanitizatorul din `inc/sanitize.php` este util pentru mediul local. Pentru producție recomand instalarea și folosirea HTMLPurifier (Composer) pentru sanitizare robustă.
+- Folosiți HTTPS și reguli de hardening (CSP, rate limiting) în producție.
 
 ## Personalizare vizuală
+- Modificați culorile în `css/style.css` (variabile `:root`) pentru a regla paleta neon/dark.
+- Logo: `assets/logo.svg` — înlocuiți cu versiunea voastră păstrând numele sau actualizați calea.
 
-Fișiere relevante:
-- `assets/logo.svg` — logo implicit (SVG) pe care îl puteți înlocui.
-- `css/style.css` — variabile CSS (`:root`) pentru paleta de culori și dimensiuni.
-- `inc/header.php` — include Google Fonts (Montserrat) și link-urile CSS/JS.
+## Testare rapidă (lint)
+- PHP lint pentru fișiere modificate: `php -l path/to/file.php`
 
-Schimbare culori: editați valorile din `:root` din `css/style.css` (ex: `--brand`).
+## Contribuții & issues
+- Deschide un issue pe repo sau trimite un PR pentru modificări.
 
-Schimbare font: modificați linkul Google Fonts din `inc/header.php` și actualizați lista de fonturi din `css/style.css`.
-
-Schimbare logo: înlocuiți `assets/logo.svg` cu logo-ul vostru (păstrați același nume sau actualizați calea din `inc/header.php`/`inc/footer.php`).
-
-Notă: Front-end-ul a fost actualizat pentru un look vibrant, colorat și prietenos pentru fani. Admin-ul a fost păstrat simplu — este construit pentru rulare locală (PHP + MySQL) și potrivit pentru XAMPP.
-
-
-## WYSIWYG editor (Quill)
-
-Am integrat editorul WYSIWYG Quill (gratuit) în interfața de admin pentru a edita știrile ca HTML formatat. Observații importante:
-
-- Conținutul introdus în admin este salvat ca HTML și este afișat ca HTML pe pagina de detaliu a știrilor. Prin urmare, doar utilizatori de încredere ar trebui să aibă acces la conturile admin.
-- Quill suportă inserare de imagini prin URL; upload server-side nu este implementat implicit aici. Dacă dorești upload, pot adăuga un endpoint `/admin/upload.php` care să salveze imaginile în `uploads/` și să returneze URL-ul pentru Quill.
-- Pentru securitate pe medii publice, adăugați sanitizare (ex: HTML Purifier) sau restricționați tag-urile permise.
+---
+Documentația va fi actualizată pe măsură ce adăugăm funcționalități (ex: HTMLPurifier, optimizare imagini, upload avatars). Dacă vrei, pot adăuga un CHANGELOG sau un fișier `docs/` cu instrucțiuni detaliate.
 
