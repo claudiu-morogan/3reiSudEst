@@ -38,3 +38,16 @@ php scripts/create_admin.php <username> <password>
 3. După crearea contului, nu uitați să păstrați `.env` în afara repo-ului (este inclus în `.gitignore`).
 
 După aceasta, folosiți pagina de login `http://localhost/3reiSudEst/admin/` pentru a vă autentifica.
+
+## Personalizare vizuală
+
+Fișiere relevante:
+- `assets/logo.svg` — logo implicit (SVG) pe care îl puteți înlocui.
+- `css/style.css` — variabile CSS (`:root`) pentru paleta de culori și dimensiuni.
+- `inc/header.php` — include Google Fonts (Montserrat) și link-urile CSS/JS.
+
+Schimbare culori: editați valorile din `:root` din `css/style.css` (ex: `--brand`).
+
+Schimbare font: modificați linkul Google Fonts din `inc/header.php` și actualizați lista de fonturi din `css/style.css`.
+
+Schimbare logo: înlocuiți `assets/logo.svg` cu logo-ul vostru (păstrați același nume sau actualizați calea din `inc/header.php`/`inc/footer.php`).

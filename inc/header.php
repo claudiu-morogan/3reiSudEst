@@ -5,6 +5,8 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <title>3 Sud Est - Fan site</title>
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
         <!-- Bootstrap 5 CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="/3reiSudEst/css/style.css" />
@@ -12,7 +14,10 @@
 <body>
 <header class="bg-dark text-white py-3">
     <div class="container d-flex align-items-center justify-content-between">
-        <a class="text-white text-decoration-none" href="/3reiSudEst/"><h1 class="h4 mb-0">3 Sud Est - Fan site</h1></a>
+        <a class="d-flex align-items-center text-white text-decoration-none" href="/3reiSudEst/">
+            <img src="/3reiSudEst/assets/logo.svg" alt="3 Sud Est" style="height:40px;" />
+            <span class="ms-3 fs-5 fw-semibold">Fan site</span>
+        </a>
         <nav class="d-none d-md-block">
             <ul class="nav">
                 <li class="nav-item"><a class="nav-link text-white" href="/3reiSudEst/">Acasă</a></li>
