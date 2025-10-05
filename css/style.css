@@ -1,0 +1,11 @@
+/* Minimal styles for the fan site */
+body { font-family: Arial, Helvetica, sans-serif; margin:0; padding:0; color:#222; background:#f7f7f7; }
+.container { max-width:900px; margin:0 auto; padding:16px; }
+.site-header { background:#222; color:#fff; }
+.site-header a { color:#fff; text-decoration:none; }
+.site-header nav { display:flex; gap:12px; }
+.site-header .container { display:flex; align-items:center; justify-content:space-between; }
+.site-footer { background:#eee; padding:12px 0; margin-top:24px; text-align:center; }
+.card { background:#fff; padding:12px; border-radius:6px; box-shadow:0 1px 3px rgba(0,0,0,0.06); margin-bottom:12px; }
+.news-item h3 { margin:0 0 8px 0; }
+.btn { display:inline-block; padding:6px 10px; background:#0073aa; color:#fff; text-decoration:none; border-radius:4px; }
