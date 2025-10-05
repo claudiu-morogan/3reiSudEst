@@ -2,7 +2,7 @@
     <footer class="py-4 mt-4" style="background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.08)); border-top:1px solid rgba(255,255,255,0.03);">
         <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between text-light">
             <div class="d-flex align-items-center">
-                <img src="/3reiSudEst/assets/3se.png" alt="logo" style="height:40px; filter: drop-shadow(0 6px 12px rgba(139,92,246,0.12));" />
+                <img src="<?= base_url() ?>/assets/3se.png" alt="logo" style="height:40px; filter: drop-shadow(0 6px 12px rgba(139,92,246,0.12));" />
                 <div class="ms-3">
                     <div class="small">&copy; <?= date('Y') ?> Fan site 3 Sud Est</div>
                     <div class="small text-muted" style="color:var(--muted);">Comunitatea 3 Sud Est - Romania</div>

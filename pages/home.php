@@ -14,14 +14,14 @@
             } else {
                     foreach ($news as $n) {
                               echo '<article class="mb-3">';
-                                  echo '<h4><a class="rainbow-text" style="text-decoration:none;" href="/3reiSudEst/?page=news&id=' . $n['id'] . '">' . htmlspecialchars($n['title']) . '</a></h4>';
+                                  echo '<h4><a class="rainbow-text" style="text-decoration:none;" href="' . base_url() . '/?page=news&id=' . $n['id'] . '">' . htmlspecialchars($n['title']) . '</a></h4>';
                                   echo '<p class="text-muted small mb-1">Publicat: ' . htmlspecialchars($n['created_at']) . '</p>';
                                   // Remove HTML tags from the saved WYSIWYG content for a clean preview
                                   $preview = strip_tags($n['content']);
                                   // Use mb_substr for safe multibyte truncation
                                   $short = mb_substr($preview, 0, 250);
                                   echo '<p>' . nl2br(htmlspecialchars($short)) . '...</p>';
-                                  echo '<a class="btn btn-sm btn-primary mt-2" href="/3reiSudEst/?page=news&id=' . $n['id'] . '">Citește tot</a>';
+                                  echo '<a class="btn btn-sm btn-primary mt-2" href="' . base_url() . '/?page=news&id=' . $n['id'] . '">Citește tot</a>';
                               echo '</article>';
                     }
             }

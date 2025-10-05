@@ -3,7 +3,7 @@ require_once __DIR__ . '/../inc/config.php';
 require_once __DIR__ . '/../inc/db.php';
 require_once __DIR__ . '/../inc/csrf.php';
 if (session_status() !== PHP_SESSION_ACTIVE) { session_start(); }
-if (isset($_SESSION['admin'])) { header('Location: /3reiSudEst/admin/dashboard.php'); exit; }
+if (isset($_SESSION['admin'])) { header('Location: ' . base_url() . '/admin/dashboard.php'); exit; }
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!csrf_check()) { $error = 'CSRF token invalid.'; }
@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($user && password_verify($p, $user['password'])) {
             $_SESSION['admin'] = true;
             $_SESSION['admin_user'] = $user['username'];
-            header('Location: /3reiSudEst/admin/dashboard.php'); exit;
+            header('Location: ' . base_url() . '/admin/dashboard.php'); exit;
         } else {
             $error = 'Credențiale invalide';
         }

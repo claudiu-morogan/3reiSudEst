@@ -62,8 +62,8 @@ require_once __DIR__ . '/../inc/header.php';
     function uploadImage(file, cb) {
         var form = new FormData();
         form.append('image', file);
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/3reiSudEst/admin/upload.php', true);
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '<?= base_url() ?>/admin/upload.php', true);
         xhr.onload = function() {
             if (xhr.status === 200) {
                 try {
