@@ -28,8 +28,13 @@ Acest proiect este doar pentru dezvoltare locală și învățare. Nu folosiți 
 
 ## Creare cont admin (one-time)
 
-1. Editați `admin/setup_user.php` și setați valorile `$user` și `$pass` la credentialele dorite.
-2. Accesați `http://localhost/3reiSudEst/admin/setup_user.php` o singură dată. Scriptul va crea un user în tabela `users` cu parola hash-uită.
-3. După confirmare, ștergeți sau redenumiți `admin/setup_user.php` pentru a nu lăsa un endpoint de creare cont expus.
+1. Folosiți scriptul CLI pentru a crea un admin (recomandat):
+
+```powershell
+php scripts/create_admin.php <username> <password>
+```
+
+2. Alternativ, editați `.env` (sau folosiți `.env.example`) pentru setările DB.
+3. După crearea contului, nu uitați să păstrați `.env` în afara repo-ului (este inclus în `.gitignore`).
 
 După aceasta, folosiți pagina de login `http://localhost/3reiSudEst/admin/` pentru a vă autentifica.
