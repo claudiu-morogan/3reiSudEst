@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="/3reiSudEst/css/style.css" />
 </head>
 <body>
-<header class="bg-dark text-white py-3">
+<header class="py-3" style="background: linear-gradient(90deg, rgba(255,107,107,0.2), rgba(124,58,237,0.2));">
     <div class="container d-flex align-items-center justify-content-between">
         <a class="d-flex align-items-center text-white text-decoration-none" href="/3reiSudEst/">
             <img src="/3reiSudEst/assets/logo.svg" alt="3 Sud Est" style="height:40px;" />

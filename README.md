@@ -51,3 +51,5 @@ Schimbare culori: editați valorile din `:root` din `css/style.css` (ex: `--bran
 Schimbare font: modificați linkul Google Fonts din `inc/header.php` și actualizați lista de fonturi din `css/style.css`.
 
 Schimbare logo: înlocuiți `assets/logo.svg` cu logo-ul vostru (păstrați același nume sau actualizați calea din `inc/header.php`/`inc/footer.php`).
+
+Notă: Front-end-ul a fost actualizat pentru un look vibrant, colorat și prietenos pentru fani. Admin-ul a fost păstrat simplu — este construit pentru rulare locală (PHP + MySQL) și potrivit pentru XAMPP.
