@@ -1,10 +1,13 @@
 <?php
 require_once __DIR__ . '/../inc/config.php';
 require_once __DIR__ . '/../inc/db.php';
+require_once __DIR__ . '/../inc/csrf.php';
 session_start();
 if (isset($_SESSION['admin'])) { header('Location: dashboard.php'); exit; }
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!csrf_check()) { $error = 'CSRF token invalid.'; }
+    else {
     $u = $_POST['user'] ?? '';
     $p = $_POST['pass'] ?? '';
     $user = findUserByUsername($u);
@@ -15,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $error = 'Credențiale invalide';
     }
+    }
 }
 require_once __DIR__ . '/../inc/header.php';
 ?>
@@ -22,6 +26,7 @@ require_once __DIR__ . '/../inc/header.php';
     <h2>Admin - Login</h2>
     <?php if ($error) echo '<p style="color:red">' . htmlspecialchars($error) . '</p>'; ?>
     <form method="post">
+        <?php echo csrf_field(); ?>
         <label>Utilizator<br><input name="user" /></label><br>
         <label>Parolă<br><input name="pass" type="password" /></label><br>
         <button class="btn" type="submit">Autentificare</button>

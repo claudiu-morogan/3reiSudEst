@@ -15,12 +15,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 $news = getNewsById($id);
 if (!$news) { header('Location: dashboard.php'); exit; }
+require_once __DIR__ . '/../inc/csrf.php';
 require_once __DIR__ . '/../inc/header.php';
 ?>
 <section class="card">
     <h2>Confirmare ștergere</h2>
     <p>Sunteți sigur că doriți să ștergeți: <strong><?= htmlspecialchars($news['title']) ?></strong>?</p>
     <form method="post">
+        <?php echo csrf_field(); ?>
         <button class="btn" name="confirm" value="1" type="submit">Da, șterge</button>
         <a href="dashboard.php">Anulează</a>
     </form>
