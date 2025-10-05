@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
 function csrf_token() {
     if (empty($_SESSION['__csrf_token'])) {
         $_SESSION['__csrf_token'] = bin2hex(random_bytes(16));
