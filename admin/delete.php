@@ -18,13 +18,17 @@ if (!$news) { header('Location: dashboard.php'); exit; }
 require_once __DIR__ . '/../inc/csrf.php';
 require_once __DIR__ . '/../inc/header.php';
 ?>
-<section class="card">
-    <h2>Confirmare ștergere</h2>
-    <p>Sunteți sigur că doriți să ștergeți: <strong><?= htmlspecialchars($news['title']) ?></strong>?</p>
-    <form method="post">
-        <?php echo csrf_field(); ?>
-        <button class="btn" name="confirm" value="1" type="submit">Da, șterge</button>
-        <a href="dashboard.php">Anulează</a>
-    </form>
-</section>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card p-4">
+            <h3>Confirmare ștergere</h3>
+            <p>Sunteți sigur că doriți să ștergeți: <strong><?= htmlspecialchars($news['title']) ?></strong>?</p>
+            <form method="post">
+                <?php echo csrf_field(); ?>
+                <button class="btn btn-danger" name="confirm" value="1" type="submit">Da, șterge</button>
+                <a class="btn btn-secondary ms-2" href="dashboard.php">Anulează</a>
+            </form>
+        </div>
+    </div>
+</div>
 <?php require_once __DIR__ . '/../inc/footer.php';

@@ -22,14 +22,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 require_once __DIR__ . '/../inc/header.php';
 ?>
-<section class="card">
-    <h2>Admin - Login</h2>
-    <?php if ($error) echo '<p style="color:red">' . htmlspecialchars($error) . '</p>'; ?>
-    <form method="post">
-        <?php echo csrf_field(); ?>
-        <label>Utilizator<br><input name="user" /></label><br>
-        <label>Parolă<br><input name="pass" type="password" /></label><br>
-        <button class="btn" type="submit">Autentificare</button>
-    </form>
-</section>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card p-4">
+            <h3>Admin - Login</h3>
+            <?php if ($error) echo '<div class="alert alert-danger">' . htmlspecialchars($error) . '</div>'; ?>
+            <form method="post">
+                <?php echo csrf_field(); ?>
+                <div class="mb-3">
+                    <label class="form-label">Utilizator</label>
+                    <input class="form-control" name="user" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Parolă</label>
+                    <input class="form-control" name="pass" type="password" />
+                </div>
+                <button class="btn btn-primary" type="submit">Autentificare</button>
+            </form>
+        </div>
+    </div>
+</div>
 <?php require_once __DIR__ . '/../inc/footer.php';

@@ -1,22 +1,32 @@
-<section class="card">
-    <h2>Bine ai venit pe fan site-ul 3 Sud Est</h2>
-    <p>Acesta este un site simplu construit cu PHP + MySQL pentru a demonstra un scaffold local pe XAMPP.</p>
-</section>
+<div class="row g-4">
+    <div class="col-lg-8">
+        <div class="card p-4">
+            <h2>Bine ai venit pe fan site-ul 3 Sud Est</h2>
+            <p class="mb-0">Acesta este un site simplu construit cu PHP + MySQL pentru a demonstra un scaffold local pe XAMPP.</p>
+        </div>
 
-<section class="card">
-    <h2>Ultimele știri</h2>
-    <?php
-    $news = fetchLatestNews(5);
-    if (!$news) {
-        echo '<p>Nu există știri de afișat.</p>';
-    } else {
-        foreach ($news as $n) {
-            echo '<div class="news-item">';
-            echo '<h3>' . htmlspecialchars($n['title']) . '</h3>';
-            echo '<p>' . nl2br(htmlspecialchars(substr($n['content'],0,300))) . '...</p>';
-            echo '<small>Publicat: ' . htmlspecialchars($n['created_at']) . '</small>';
-            echo '</div>';
-        }
-    }
-    ?>
-</section>
+        <div class="card p-4 mt-4">
+            <h3>Ultimele știri</h3>
+            <?php
+            $news = fetchLatestNews(5);
+            if (!$news) {
+                    echo '<p>Nu există știri de afișat.</p>';
+            } else {
+                    foreach ($news as $n) {
+                            echo '<article class="mb-3">';
+                            echo '<h4><a href="/3reiSudEst/?page=news&id=' . $n['id'] . '">' . htmlspecialchars($n['title']) . '</a></h4>';
+                            echo '<p class="text-muted small mb-1">Publicat: ' . htmlspecialchars($n['created_at']) . '</p>';
+                            echo '<p>' . nl2br(htmlspecialchars(substr($n['content'],0,250))) . '...</p>';
+                            echo '</article>';
+                    }
+            }
+            ?>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <aside class="card p-3">
+            <h5>Despre</h5>
+            <p class="small">Fanii pot găsi informații despre membri, știri și altele.</p>
+        </aside>
+    </div>
+</div>
