@@ -24,4 +24,25 @@ define('DB_PASS', $env['DB_PASS'] ?? '');
 // Project root
 define('ROOT', __DIR__ . '/..');
 
+/**
+ * Return the base URL for the application, e.g. "http://localhost/3reiSudEst"
+ */
+function base_url(): string
+{
+	$host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+	$isHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443);
+	$scheme = $isHttps ? 'https' : 'http';
+	// SCRIPT_NAME is something like /3reiSudEst/admin/upload.php -> dirname twice gives /3reiSudEst
+	$script = $_SERVER['SCRIPT_NAME'] ?? '';
+	$parts = explode('/', trim($script, '/'));
+	// If app is in a subfolder, take the first path segment(s) until public index.php; fallback to dirname
+	$base = '';
+	if ($script) {
+		$base = dirname(dirname($script));
+		if ($base === '\\' || $base === '.') $base = '';
+	}
+	$base = rtrim($base, '/\\');
+	return $scheme . '://' . $host . ($base ? '/' . ltrim($base, '/') : '');
+}
+
 ?>

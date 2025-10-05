@@ -7,8 +7,10 @@
           echo '<h2>Știre inexistentă</h2>';
       } else {
           echo '<h2 class="rainbow-text">' . htmlspecialchars($item['title']) . '</h2>';
-          echo '<p>' . nl2br(htmlspecialchars($item['content'])) . '</p>';
-          echo '<p class="text-muted small">Publicat: ' . htmlspecialchars($item['created_at']) . '</p>';
+          // Render content as HTML (trusted from admin WYSIWYG). IMPORTANT: consider server-side sanitization
+          // (eg. HTML Purifier) before deploying publicly to avoid XSS if admin account is compromised.
+          echo '<div class="mt-3">' . $item['content'] . '</div>';
+          echo '<p class="text-muted small mt-3">Publicat: ' . htmlspecialchars($item['created_at']) . '</p>';
       }
       echo '<p><a class="btn btn-sm btn-outline-primary" href="/3reiSudEst/?page=news">Înapoi la listă</a></p>';
   } else {
@@ -26,7 +28,10 @@
               echo '<article class="mb-3">';
               echo '<h4><a class="rainbow-text" style="text-decoration:none;" href="/3reiSudEst/?page=news&id=' . $n['id'] . '">' . htmlspecialchars($n['title']) . '</a></h4>';
               echo '<p class="text-muted small mb-1">Publicat: ' . htmlspecialchars($n['created_at']) . '</p>';
-              echo '<p>' . nl2br(htmlspecialchars(substr($n['content'],0,300))) . '...</p>';
+              // Truncate without HTML tags for clean preview (multibyte-safe)
+              $preview = strip_tags($n['content']);
+              $short = mb_substr($preview, 0, 300);
+              echo '<p>' . nl2br(htmlspecialchars($short)) . '...</p>';
               echo '<a class="btn btn-sm btn-primary mt-2" href="/3reiSudEst/?page=news&id=' . $n['id'] . '">Citește tot</a>';
               echo '</article>';
           }

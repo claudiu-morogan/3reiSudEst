@@ -15,6 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $title = $_POST['title'] ?? '';
         $content = $_POST['content'] ?? '';
         if ($title && $content) {
+            require_once __DIR__ . '/../inc/sanitize.php';
+            $content = sanitize_html($content);
             updateNews($id, $title, $content);
             $msg = 'Știre actualizată.';
             $news = getNewsById($id);
@@ -51,12 +53,47 @@ require_once __DIR__ . '/../inc/header.php';
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
 <script>
-    var quill = new Quill('#quill-editor', {
-        theme: 'snow',
-        modules: { toolbar: [['bold','italic','underline'], [{ 'list': 'ordered'}, { 'list': 'bullet' }], ['link','image']] }
-    });
+    var toolbarOptions = [['bold','italic','underline'], [{ 'list': 'ordered'}, { 'list': 'bullet' }], ['link','image']];
+    var quill = new Quill('#quill-editor', { theme: 'snow', modules: { toolbar: toolbarOptions } });
     // Set initial content
     quill.root.innerHTML = <?= json_encode($news['content']) ?>;
+
+    // Image upload handler (same as dashboard)
+    function uploadImage(file, cb) {
+        var form = new FormData();
+        form.append('image', file);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/3reiSudEst/admin/upload.php', true);
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                try {
+                    var res = JSON.parse(xhr.responseText);
+                    if (res && res.url) cb(null, res.url);
+                    else cb(new Error('Invalid response'));
+                } catch (e) { cb(e); }
+            } else {
+                cb(new Error('Upload failed: ' + xhr.status));
+            }
+        };
+        xhr.send(form);
+    }
+    quill.getModule('toolbar').addHandler('image', function() {
+        var input = document.createElement('input');
+        input.setAttribute('type', 'file');
+        input.setAttribute('accept', 'image/*');
+        input.onchange = function() {
+            var file = input.files[0];
+            if (!file) return;
+            uploadImage(file, function(err, url) {
+                if (err) { alert('Upload failed'); return; }
+                var range = quill.getSelection(true);
+                quill.insertEmbed(range.index, 'image', url);
+                quill.setSelection(range.index + 1);
+            });
+        };
+        input.click();
+    });
+
     // On submit, copy HTML content to hidden input
     document.querySelector('form').addEventListener('submit', function(e){
         var html = quill.root.innerHTML;

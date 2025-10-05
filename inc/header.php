@@ -1,4 +1,5 @@
 
+<?php if (session_status() !== PHP_SESSION_ACTIVE) { session_start(); } ?>
 <!doctype html>
 <html lang="ro">
 <head>
@@ -15,7 +16,7 @@
 <header class="py-3" style="background: linear-gradient(90deg, rgba(255,107,107,0.2), rgba(124,58,237,0.2));">
     <div class="container d-flex align-items-center justify-content-between">
         <a class="d-flex align-items-center text-white text-decoration-none" href="/3reiSudEst/">
-            <img src="/3reiSudEst/assets/logo.svg" alt="3 Sud Est" style="height:40px;" />
+            <img src="/3reiSudEst/assets/3se.png" alt="3 Sud Est" style="height:40px;" />
             <span class="ms-3 fs-5 fw-semibold">Fan site</span>
         </a>
         <nav class="d-none d-md-block">
@@ -24,7 +25,9 @@
                 <li class="nav-item"><a class="nav-link text-white" href="/3reiSudEst/?page=about">Despre</a></li>
                 <li class="nav-item"><a class="nav-link text-white" href="/3reiSudEst/?page=members">Membri</a></li>
                 <li class="nav-item"><a class="nav-link text-white" href="/3reiSudEst/?page=news">Știri</a></li>
-                <li class="nav-item"><a class="nav-link text-white" href="/3reiSudEst/admin/">Admin</a></li>
+                <?php if (!empty($_SESSION['admin'])): ?>
+                    <li class="nav-item"><a class="nav-link text-white" href="/admin/index.php">Actualizare</a></li>
+                <?php endif; ?>
             </ul>
         </nav>
         <div class="d-md-none">
@@ -42,7 +45,9 @@
                 <li class="nav-item"><a class="nav-link text-white" href="/3reiSudEst/?page=about">Despre</a></li>
                 <li class="nav-item"><a class="nav-link text-white" href="/3reiSudEst/?page=members">Membri</a></li>
                 <li class="nav-item"><a class="nav-link text-white" href="/3reiSudEst/?page=news">Știri</a></li>
-                <li class="nav-item"><a class="nav-link text-white" href="/3reiSudEst/admin/">Admin</a></li>
+                <?php if (!empty($_SESSION['admin'])): ?>
+                    <li class="nav-item"><a class="nav-link text-white" href="/autentificare">Actualizare</a></li>
+                <?php endif; ?>
             </ul>
         </div>
     </div>
