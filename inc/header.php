@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <title>3 Sud Est - Fan site</title>
         <!-- Bootstrap 5 CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-3g6mXQ6+6Qj1XKj9p6qQ0y3Yb8a1Yd2Z9sQ1pJ/8Y6Y5s8Q3Q5Vb3Q==" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="/3reiSudEst/css/style.css" />
 </head>
 <body>
