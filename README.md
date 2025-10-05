@@ -53,3 +53,13 @@ Schimbare font: modificați linkul Google Fonts din `inc/header.php` și actuali
 Schimbare logo: înlocuiți `assets/logo.svg` cu logo-ul vostru (păstrați același nume sau actualizați calea din `inc/header.php`/`inc/footer.php`).
 
 Notă: Front-end-ul a fost actualizat pentru un look vibrant, colorat și prietenos pentru fani. Admin-ul a fost păstrat simplu — este construit pentru rulare locală (PHP + MySQL) și potrivit pentru XAMPP.
+
+
+## WYSIWYG editor (Quill)
+
+Am integrat editorul WYSIWYG Quill (gratuit) în interfața de admin pentru a edita știrile ca HTML formatat. Observații importante:
+
+- Conținutul introdus în admin este salvat ca HTML și este afișat ca HTML pe pagina de detaliu a știrilor. Prin urmare, doar utilizatori de încredere ar trebui să aibă acces la conturile admin.
+- Quill suportă inserare de imagini prin URL; upload server-side nu este implementat implicit aici. Dacă dorești upload, pot adăuga un endpoint `/admin/upload.php` care să salveze imaginile în `uploads/` și să returneze URL-ul pentru Quill.
+- Pentru securitate pe medii publice, adăugați sanitizare (ex: HTML Purifier) sau restricționați tag-urile permise.
+

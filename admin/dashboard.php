@@ -34,7 +34,10 @@ require_once __DIR__ . '/../inc/header.php';
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Conținut</label>
-                    <textarea class="form-control" name="content" rows="6"></textarea>
+                    <!-- Quill editor will be here -->
+                    <div id="quill-editor" style="height:300px;"></div>
+                    <!-- Hidden input to submit HTML content -->
+                    <input type="hidden" name="content" id="content-input" />
                 </div>
                 <button class="btn btn-primary" type="submit">Adaugă știre</button>
             </form>
@@ -59,4 +62,18 @@ require_once __DIR__ . '/../inc/header.php';
         </div>
     </div>
 </div>
+<!-- Quill WYSIWYG (free, open-source) -->
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+<script>
+    var quill = new Quill('#quill-editor', {
+        theme: 'snow',
+        modules: { toolbar: [['bold','italic','underline'], [{ 'list': 'ordered'}, { 'list': 'bullet' }], ['link','image']] }
+    });
+    // On submit, copy HTML content to hidden input
+    document.querySelector('form').addEventListener('submit', function(e){
+        var html = quill.root.innerHTML;
+        document.getElementById('content-input').value = html;
+    });
+</script>
 <?php require_once __DIR__ . '/../inc/footer.php';
