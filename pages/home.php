@@ -13,11 +13,12 @@
                     echo '<p>Nu există știri de afișat.</p>';
             } else {
                     foreach ($news as $n) {
-                            echo '<article class="mb-3">';
-                            echo '<h4><a href="/3reiSudEst/?page=news&id=' . $n['id'] . '">' . htmlspecialchars($n['title']) . '</a></h4>';
-                            echo '<p class="text-muted small mb-1">Publicat: ' . htmlspecialchars($n['created_at']) . '</p>';
-                            echo '<p>' . nl2br(htmlspecialchars(substr($n['content'],0,250))) . '...</p>';
-                            echo '</article>';
+                              echo '<article class="mb-3">';
+                                  echo '<h4><a class="rainbow-text" style="text-decoration:none;" href="/3reiSudEst/?page=news&id=' . $n['id'] . '">' . htmlspecialchars($n['title']) . '</a></h4>';
+                                  echo '<p class="text-muted small mb-1">Publicat: ' . htmlspecialchars($n['created_at']) . '</p>';
+                                  echo '<p>' . nl2br(htmlspecialchars(substr($n['content'],0,250))) . '...</p>';
+                                  echo '<a class="btn btn-sm btn-primary mt-2" href="/3reiSudEst/?page=news&id=' . $n['id'] . '">Citește tot</a>';
+                              echo '</article>';
                     }
             }
             ?>

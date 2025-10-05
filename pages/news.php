@@ -27,6 +27,7 @@
               echo '<h4><a class="rainbow-text" style="text-decoration:none;" href="/3reiSudEst/?page=news&id=' . $n['id'] . '">' . htmlspecialchars($n['title']) . '</a></h4>';
               echo '<p class="text-muted small mb-1">Publicat: ' . htmlspecialchars($n['created_at']) . '</p>';
               echo '<p>' . nl2br(htmlspecialchars(substr($n['content'],0,300))) . '...</p>';
+              echo '<a class="btn btn-sm btn-primary mt-2" href="/3reiSudEst/?page=news&id=' . $n['id'] . '">Citește tot</a>';
               echo '</article>';
           }
       }
