@@ -1,0 +1,80 @@
+# 3 Sud Est - Architecture Overview
+
+## System Layers
+
+1. Presentation Layer (Views)
+   - Public site templates (views/)
+   - Admin panel templates (admin/views/)
+   - Reusable layouts (header/footer)
+
+2. Business Logic Layer (Controllers + Models)
+   - Models: Data access and validation (app/models/)
+   - Controllers: Request handling and orchestration
+
+3. Data Layer
+   - Database abstraction (app/Database.php)
+   - MySQL 8.x with PDO prepared statements
+
+4. Security Layer
+   - Authentication (app/Auth.php)
+   - CSRF protection (app/CSRF.php)
+   - Input sanitization and output escaping
+
+## Request Flow
+
+Public Site:
+  User -> .htaccess -> index.php -> Router -> Model -> Database -> View -> HTML
+
+Admin Panel:
+  User -> admin/index.php -> Auth Check -> Router -> Model -> Database -> View -> HTML
+
+## Animation Strategy
+
+- Hero section: CSS stagger animations on load
+- Scroll reveals: IntersectionObserver + CSS classes
+- Timeline: Alternating slide-in effects
+- Hover: Pure CSS transitions
+- Parallax: Single hero background only (throttled)
+
+Target: 60fps on mobile devices
+
+## Security Architecture
+
+Layer 1: HTTP Headers (X-Frame-Options, etc.)
+Layer 2: Input Validation (prepared statements, sanitization)
+Layer 3: Authentication (bcrypt, session management)
+Layer 4: CSRF Protection (token validation)
+Layer 5: Access Control (Auth guards)
+
+## Database Schema Summary
+
+- users: Admin authentication
+- albums + tracks: Discography (1-to-many)
+- news: Articles with slugs
+- biography_sections: Modular bio content
+- gallery_items: Photo gallery
+- quotes: Lyric excerpts
+
+All tables use utf8mb4, have indexes on common queries, and support soft deletion.
+
+## File Structure Philosophy
+
+Separation of concerns:
+- app/: Backend logic (config, database, auth, models)
+- views/: Public templates (HTML + PHP)
+- admin/: Isolated admin application
+- public/: Static assets (CSS, JS, uploads)
+- sql/: Database versioning
+
+## Deployment Targets
+
+- Development: Local PHP server
+- Staging: Optional pre-production test
+- Production: Shared hosting or VPS with Apache/Nginx
+
+Requirements:
+- PHP 8.0+
+- MySQL 8.0+ or MariaDB 10.5+
+- mod_rewrite (Apache) or equivalent (Nginx)
+
+Built for performance, security, and maintainability.

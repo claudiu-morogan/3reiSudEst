@@ -1,8 +1,33 @@
-/.env
-/vendor/
-/node_modules/
-/.idea/
-/.vscode/
+# Environment
+.env
+
+# Uploads
+public/uploads/*
+!public/uploads/.gitkeep
+
+# Logs
+logs/*
+!logs/.gitkeep
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.sublime-*
+
+# Temporary files
+*.tmp
 *.log
-uploads/
-/.DS_Store
+*.swp
+*.swo
+*~
+
+# Docker environment
+.env.docker
+
+# Database backups
+backups/
+*.sql

@@ -1,0 +1,196 @@
+/**
+ * Animation Library
+ * Smooth, performant, 60fps animations
+ */
+
+/* ================================
+   KEYFRAMES
+   ================================ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(157, 78, 221, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(157, 78, 221, 0.6);
+  }
+}
+
+/* ================================
+   UTILITY CLASSES
+   ================================ */
+
+/* Scroll reveal base (IntersectionObserver controlled) */
+.reveal {
+  opacity: 0;
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+.reveal.active {
+  opacity: 1;
+}
+
+.reveal-up {
+  transform: translateY(40px);
+}
+
+.reveal-up.active {
+  transform: translateY(0);
+}
+
+.reveal-left {
+  transform: translateX(-40px);
+}
+
+.reveal-left.active {
+  transform: translateX(0);
+}
+
+.reveal-right {
+  transform: translateX(40px);
+}
+
+.reveal-right.active {
+  transform: translateX(0);
+}
+
+.reveal-scale {
+  transform: scale(0.95);
+}
+
+.reveal-scale.active {
+  transform: scale(1);
+}
+
+/* Stagger delays for children */
+.stagger-children > * {
+  opacity: 0;
+  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
+
+/* Page transitions (for SPA-like navigation) */
+.page-transition-enter {
+  animation: fadeIn 0.4s ease-out;
+}
+
+.page-transition-exit {
+  animation: fadeIn 0.3s ease-in reverse;
+}
+
+/* ================================
+   INTERACTIVE ELEMENTS
+   ================================ */
+
+/* Button hover lift */
+.btn-lift {
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.btn-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-lift:active {
+  transform: translateY(0);
+}
+
+/* Card hover effect */
+.card-hover {
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Image zoom on hover */
+.image-zoom {
+  overflow: hidden;
+}
+
+.image-zoom img {
+  transition: transform var(--transition-slow);
+  will-change: transform;
+}
+
+.image-zoom:hover img {
+  transform: scale(1.05);
+}
+
+/* Neon glow hover */
+.neon-glow:hover {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Performance hints */
+.will-animate {
+  will-change: transform, opacity;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

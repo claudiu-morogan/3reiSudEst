@@ -1,0 +1,33 @@
+# Version control
+.git
+.gitignore
+
+# Environment files (will be set via docker-compose)
+.env
+
+# Documentation
+*.md
+ARCHITECTURE.txt
+
+# Logs (will be generated in container)
+logs/*
+
+# Dependencies
+node_modules
+vendor
+
+# IDE files
+.vscode
+.idea
+*.sublime-*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.log
+*.swp
+*.swo
+*~

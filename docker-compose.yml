@@ -1,0 +1,92 @@
+version: '3.8'
+
+services:
+  # Web server (PHP 8.2 + Apache)
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: 3sudest_web
+    ports:
+      - "8080:80"
+    volumes:
+      # Mount application code for live editing
+      - .:/var/www/html
+      # Persist uploads across container restarts
+      - uploads_data:/var/www/html/public/uploads
+      - logs_data:/var/www/html/logs
+    environment:
+      - APP_ENV=development
+      - APP_URL=http://localhost:8080
+      - BASE_PATH=
+      - DB_HOST=db
+      - DB_NAME=3sudest
+      - DB_USER=3sudest_user
+      - DB_PASS=secure_password_123
+      - DB_CHARSET=utf8mb4
+      - SESSION_LIFETIME=1800
+      - CSRF_TOKEN_NAME=csrf_token
+      - MAX_UPLOAD_SIZE=5242880
+      - ALLOWED_IMAGE_TYPES=image/jpeg,image/png,image/webp
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - 3sudest_network
+    restart: unless-stopped
+
+  # MySQL 8.0 Database
+  db:
+    image: mysql:8.0
+    container_name: 3sudest_db
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: 3sudest
+      MYSQL_USER: 3sudest_user
+      MYSQL_PASSWORD: secure_password_123
+      MYSQL_ROOT_PASSWORD: root_password_123
+    volumes:
+      # Persist database data
+      - db_data:/var/lib/mysql
+      # Auto-import schema on first run
+      - ./sql/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot_password_123"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - 3sudest_network
+    restart: unless-stopped
+
+  # phpMyAdmin (optional, for database management)
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: 3sudest_phpmyadmin
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: root_password_123
+      UPLOAD_LIMIT: 10M
+    depends_on:
+      - db
+    networks:
+      - 3sudest_network
+    restart: unless-stopped
+
+networks:
+  3sudest_network:
+    driver: bridge
+
+volumes:
+  db_data:
+    driver: local
+  uploads_data:
+    driver: local
+  logs_data:
+    driver: local

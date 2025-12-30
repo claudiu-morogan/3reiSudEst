@@ -1,0 +1,32 @@
+# Files/directories to exclude when deploying to production
+
+# Development
+.git/
+.gitignore
+.claude/
+node_modules/
+
+# Docker
+docker-compose.yml
+Dockerfile
+.dockerignore
+.env.docker
+
+# Development tools
+install/
+docs/
+Makefile
+
+# Templates (don't deploy, create custom .env instead)
+.env.example
+
+# Logs (create empty on server)
+logs/*.log
+
+# Documentation
+*.md
+!README.md
+
+# Development scripts
+*.sh
+*.bat
