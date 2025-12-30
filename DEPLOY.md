@@ -88,8 +88,12 @@ DB_PASS=strong_password_here
 DB_CHARSET=utf8mb4
 
 APP_ENV=production
-BASE_URL=https://yourdomain.com
+# APP_URL will auto-detect from server - comment out to use auto-detection
+# APP_URL=https://yourdomain.com
+BASE_PATH=
 ```
+
+**Important:** The `APP_URL` setting is now optional. The system will automatically detect your domain (http/https) from the server. Only uncomment and set `APP_URL` if you need to force a specific URL.
 
 ### 4. Setup Database
 

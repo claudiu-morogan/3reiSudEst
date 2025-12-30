@@ -41,15 +41,21 @@ Upload to your server:
 
 ### 2. Configure
 
-Create `.env` file:
+Create `.env` file (see `.env.example` or `.env.uat`):
 ```env
 DB_HOST=localhost
 DB_NAME=your_database
 DB_USER=your_user
 DB_PASS=your_password
+DB_CHARSET=utf8mb4
+
 APP_ENV=production
-BASE_URL=https://yourdomain.com
+# APP_URL auto-detects - leave commented for automatic detection
+# APP_URL=https://yourdomain.com
+BASE_PATH=
 ```
+
+**Note:** URL auto-detection is enabled. The system automatically detects your domain and protocol.
 
 ### 3. Database
 

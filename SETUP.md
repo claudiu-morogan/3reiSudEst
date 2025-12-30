@@ -58,15 +58,21 @@ index.php
 
 #### 2. Configure Environment
 
-Create `.env` file on server:
+Create `.env` file on server (copy from `.env.example` or `.env.uat`):
 ```env
 DB_HOST=localhost
 DB_NAME=your_database_name
 DB_USER=your_database_user
 DB_PASS=your_database_password
+DB_CHARSET=utf8mb4
+
 APP_ENV=production
-BASE_URL=https://yourdomain.com
+# APP_URL will auto-detect - leave commented unless you need a specific URL
+# APP_URL=https://yourdomain.com
+BASE_PATH=
 ```
+
+**Note:** `APP_URL` is optional and will automatically detect your domain from the server. Only set it explicitly if auto-detection doesn't work.
 
 #### 3. Setup Database
 

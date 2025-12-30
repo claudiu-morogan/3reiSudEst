@@ -51,7 +51,17 @@ define('DB_PASS', $env['DB_PASS'] ?? '');
 define('DB_CHARSET', $env['DB_CHARSET'] ?? 'utf8mb4');
 
 define('APP_ENV', $env['APP_ENV'] ?? 'production');
-define('APP_URL', rtrim($env['APP_URL'] ?? '', '/'));
+
+// Auto-detect APP_URL if not set in .env
+if (!empty($env['APP_URL'])) {
+    define('APP_URL', rtrim($env['APP_URL'], '/'));
+} else {
+    // Auto-detect from server variables
+    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+    $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+    define('APP_URL', $protocol . '://' . $host);
+}
+
 define('BASE_PATH', trim($env['BASE_PATH'] ?? '', '/'));
 
 define('SESSION_LIFETIME', (int)($env['SESSION_LIFETIME'] ?? 1800));
